@@ -1,6 +1,6 @@
 import pandas as pd
 from prophet import Prophet
-import pickle
+import pickle5 as pickle
 import streamlit as st
 
 # Load the Prophet model from the saved file
