@@ -6,6 +6,9 @@
     <title>Predict AQI</title>
 </head>
 <body>
+    {% if pred %}
+    <h1>{{pred}} is the AQI for City: {{city}} & Date {{date}}</h1>
+    {% endif %}
     <form action="" method="post">
         {% csrf_token %}
         <input type="text" name="city" id="city">
