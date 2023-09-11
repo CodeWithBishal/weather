@@ -4,7 +4,7 @@ import pickle5 as pickle
 import streamlit as st
 
 # Load the Prophet model from the saved file
-with open('final_model.pkl', 'rb') as model_file:
+with open('/var/www/weather/stlit/final_model.pkl', 'rb') as model_file:
     loaded_model = pickle.load(model_file)
 
 def predict_aqi(city, input_date, model, df):
@@ -46,6 +46,6 @@ def main():
 
 if __name__ == "__main__":
     # Load historical AQI data into a DataFrame (assuming 'ds', 'y', and 'city' columns)
-    historical_data = pd.read_csv('output.csv')
+    historical_data = pd.read_csv('/var/www/weather/Model/output.csv')
     main()
 
