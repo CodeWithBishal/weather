@@ -2,6 +2,7 @@ import pandas as pd
 from prophet import Prophet
 import pickle5 as pickle
 import streamlit as st
+from datetime import datetime, timedelta
 
 # Load the Prophet model from the saved file
 with open('/var/www/weather/stlit/final_model.pkl', 'rb') as model_file:
@@ -34,7 +35,7 @@ def main():
 
     # fetching the input data from the user
     city = st.text_input('Enter the city:')
-    date = st.text_input('Enter the date (YYYY-MM-DD):')
+    date = st.date_input("Select a future date:", datetime.now() + timedelta(days=1))
 
     # prediction part
     aqi = ''
