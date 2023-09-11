@@ -4,7 +4,7 @@ from joblib import load
 import pandas as pd
 
 # model = load("./Model/model.joblib")
-historical_data = pd.read_csv('./Model/.delete/output.csv')
+historical_data = pd.read_csv('Model/output.csv')
 
 # Create your views here.
 def index(request):
