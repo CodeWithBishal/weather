@@ -47,6 +47,6 @@ def main():
 
 if __name__ == "__main__":
     # Load historical AQI data into a DataFrame (assuming 'ds', 'y', and 'city' columns)
-    historical_data = pd.read_csv('output.csv')
+    historical_data = pd.read_csv('/var/www/weather/Model/output.csv')
     main()
 
