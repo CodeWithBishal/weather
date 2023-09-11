@@ -32,7 +32,7 @@ selected_date = st.date_input("Select a future date:", datetime.now() + timedelt
 city = st.text_input("Enter a City")
 st.title(city)
 if st.button("Get Weather Prediction"):
-    prediction = predict_aqi(selected_date,city,historical_data)
+    prediction = predict_aqi(city, selected_date, historical_data)
     
     st.subheader(f"Weather prediction for {selected_date.strftime('%Y-%m-%d')}:")
     st.write(f"Prediction: {prediction}")
