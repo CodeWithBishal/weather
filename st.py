@@ -30,7 +30,6 @@ def predict_aqi(city, input_date, df):
 st.title("Weather Forecast Calendar")
 selected_date = st.date_input("Select a future date:", datetime.now() + timedelta(days=1))
 city = st.text_input("Enter a City")
-st.title(city)
 if st.button("Get Weather Prediction"):
     prediction = predict_aqi(city, selected_date, historical_data)
     
