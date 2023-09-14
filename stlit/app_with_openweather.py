@@ -3,6 +3,8 @@ from prophet import Prophet
 import pickle
 import streamlit as st
 import requests
+from datetime import datetime, timedelta
+
 
 # Load the Prophet model from the saved file
 with open('/var/www/weather/stlit/pakka_final_model.pkl', 'rb') as model_file:
@@ -35,7 +37,7 @@ def main():
 
     # fetching the input data from the user
     city = st.text_input('Enter the city:')
-    date = st.text_input('Enter the date (YYYY-MM-DD):')
+    date = st.code(body=datetime.now(), language="markdown")
 
     # prediction part
     aqi = ''
@@ -45,12 +47,13 @@ def main():
 
 
     api_key = 'ab909bfc29fc6d1a9010f00d8f3530d1'
-
-    weather_data = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&units=imperial&APPID={api_key}').json()
-
-    desc = weather_data['weather'][0]['description']
-    temp = 5/9*(weather_data['main']['temp'] - 32)
-    humi = weather_data['main']['humidity']
+    weather_data = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&units=imperial&APPID={api_key}')
+    st.title()
+    if weather_data.status_code == "200":
+        weather_data = weather_data.json()
+        desc = weather_data['weather'][0]['description']
+        temp = 5/9*(weather_data['main']['temp'] - 32)
+        humi = weather_data['main']['humidity']
     
 
 
