@@ -48,10 +48,10 @@ def main():
 
 
     api_key = 'ab909bfc29fc6d1a9010f00d8f3530d1'
-    weather_data = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&units=imperial&APPID={api_key}')
+    weather_data_req = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&units=imperial&APPID={api_key}')
     st.title()
-    if weather_data.status_code == "200":
-        weather_data = weather_data.json()
+    if weather_data_req.status_code == "200":
+        weather_data = weather_data_req.json()
         desc = weather_data['weather'][0]['description']
         temp = 5/9*(weather_data['main']['temp'] - 32)
         humi = weather_data['main']['humidity']
@@ -60,10 +60,11 @@ def main():
 
     if st.button('Predict AQI'):
         aqi = predict_aqi(city, date, loaded_model, historical_data)
-        st.success(f"Predicted AQI for {city} on {date}: {aqi:.2f} µg/m³")
-        st.write(f'Current weather in {city} is',desc.capitalize())
-        st.write(f'Current temperature in {city} is', round(temp, 2),'°C')
-        st.write(f'Current humidity in {city} is', humi,'%')
+        if weather_data_req.status_code == "200":
+            st.success(f"Predicted AQI for {city} on {date}: {aqi:.2f} µg/m³")
+            st.write(f'Current weather in {city} is',desc.capitalize())
+            st.write(f'Current temperature in {city} is', round(temp, 2),'°C')
+            st.write(f'Current humidity in {city} is', humi,'%')
 
 if __name__ == "__main__":
     # Load historical AQI data into a DataFrame (assuming 'ds', 'y', and 'city' columns)
