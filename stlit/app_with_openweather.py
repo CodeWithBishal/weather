@@ -38,7 +38,7 @@ def main():
     # fetching the input data from the user
     city = st.text_input('Enter the city:')
     today_date = datetime.today().strftime('%Y-%m-%d')
-    date = st.text_input(today_date)
+    date = st.text_input(str(today_date))
 
     # prediction part
     aqi = ''
