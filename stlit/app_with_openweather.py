@@ -37,7 +37,7 @@ def main():
 
     # fetching the input data from the user
     city = st.text_input('Enter the city:')
-    date = st.code(body={datetime.now() + timedelta(days=0)}, language="markdown")
+    date = st.code(datetime.today().strftime('%Y-%m-%d'), language="markdown")
 
     # prediction part
     aqi = ''
