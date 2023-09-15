@@ -4,7 +4,7 @@ from joblib import load
 import pandas as pd
 import pickle
 
-with open('/var/www/weather/stlit/pakka_final_model.pkl', 'rb') as model_file:
+with open('/var/www/weather/Model/pakka_final_model.pkl', 'rb') as model_file:
     loaded_model = pickle.load(model_file)
 # model = load("./Model/model.joblib")
 historical_data = pd.read_csv('/var/www/weather/Model/output.csv')
