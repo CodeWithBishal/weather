@@ -3,6 +3,7 @@ from .models import *
 from joblib import load
 import pandas as pd
 import pickle
+import requests
 
 with open('/var/www/weather/Model/pakka_final_model.pkl', 'rb') as model_file:
     loaded_model = pickle.load(model_file)
@@ -14,11 +15,17 @@ def index(request):
     if request.method == "POST":
         city = request.POST['city']
         date = request.POST['date']
-        print(city)
-        # date=date
-        print(date)
         pred = predict_aqi(city, date, loaded_model, historical_data)
-        context={"pred":pred, "date":date, "city":city}
+        api_key = 'ab909bfc29fc6d1a9010f00d8f3530d1'
+        weather_data_req = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&units=imperial&APPID={api_key}')
+        if weather_data_req.status_code == "200":
+            weather_data = weather_data_req.json()
+            desc = weather_data['weather'][0]['description']
+            temp = 5/9*(weather_data['main']['temp'] - 32)
+            humi = weather_data['main']['humidity']
+            context={"pred":pred, "date":date, "city":city,"desc":desc,"temp":temp,"humi":humi}
+        else:
+            context={"pred":pred, "date":date, "city":city}
         return render(request,"index.html",context=context)
     return render(request,"index.html",)
 

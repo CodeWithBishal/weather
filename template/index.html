@@ -7,7 +7,7 @@
 </head>
 <body>
     {% if pred %}
-    <h1>{{pred}} is the AQI for City: {{city}} & Date {{date}}</h1>
+    <h1>{{pred}} is the AQI for City: {{city}} & Date {{date}} {{desc}} {{humi}} {{temp}}</h1>
     {% endif %}
     <form action="" method="post">
         {% csrf_token %}
