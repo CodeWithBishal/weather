@@ -25,7 +25,7 @@ def index(request):
             humi = weather_data['main']['humidity']
             context={"pred":pred, "date":date, "city":city,"desc":desc,"temp":temp,"humi":humi}
         else:
-            context={"pred":pred, "date":date, "city":city,"desc":"","temp":"","humi":""}
+            context={"pred":pred, "date":date, "city":city,"desc":weather_data_req,"temp":weather_data_req.status_code,"humi":weather_data_req.headers}
         return render(request,"index.html",context=context)
     return render(request,"index.html",)
 
