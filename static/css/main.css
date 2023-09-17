@@ -785,8 +785,8 @@ margin-inline: -16px;
         filter: drop-shadow(0px 3px 6px hsla(0, 0%, 0%, 0.4));
     }
     main{
-        height: calc(100vh - 120px);
-        height: calc(100svh - 120px);
+        height: calc(100vh - 100px);
+        height: calc(100svh - 100px);
     }
     article.container{
         grid-template-columns: 360px minmax(0,1fr);
