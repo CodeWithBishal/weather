@@ -4,11 +4,19 @@ from joblib import load
 import pandas as pd
 import pickle
 import requests
+from decouple import config
 
-with open('/var/www/weather/Model/pakka_final_model.pkl', 'rb') as model_file:
-    loaded_model = pickle.load(model_file)
+# debug = config('DEBUG')
+
+# if not debug:
+#     path = "/var/www/weather/Model/"
+# else:
+#     path = "./Model/"
+
+# with open(path+'pakka_final_model.pkl', 'rb') as model_file:
+#     loaded_model = pickle.load(model_file)
 # model = load("./Model/model.joblib")
-historical_data = pd.read_csv('/var/www/weather/Model/output.csv')
+# historical_data = pd.read_csv(path+"output.csv")
 
 # Create your views here.
 def index(request):
@@ -26,7 +34,6 @@ def index(request):
         return render(request,"index.html",context=context)
     return render(request,"index.html",)
 
-from prophet import Prophet
 import matplotlib.pyplot as plt
 def predict_aqi(city, input_date, model, df):
     # Filter data for the specified city
