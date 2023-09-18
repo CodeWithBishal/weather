@@ -29,22 +29,7 @@
                         <span class="m-icon">arrow_back</span>
                     </button>
                 </div>
-                <div class="search-result" data-search-result>
-                    <ul class="view-list" data-search-list>
-                        <li class="view-item">
-                            <span class="m-icon">
-                                location_on
-                            </span>
-                            <div>
-                                <p class="item-title">
-                                    Delhi
-                                </p>
-                                <p class="item-2 label-subtitle">Delhi, IN</p>
-                            </div>
-                            <a href="#" class="item-link has-state" data-search-toggler></a>
-                        </li>
-                    </ul>
-                </div>
+                <div class="search-result" data-search-result></div>
             </div>
             <div class="header-actions">
                 <button class="icon-btn has-state" aria-label="open search" data-search-toggler>
@@ -58,7 +43,7 @@
         </div>
     </header>
     <main>
-        <article class="container">
+        <article class="container" data-container>
             <div class="content-left">
                 <!-- current weather  -->
                 <section class="section current-weather" aria-label="current weather" data-current-weather>
@@ -420,6 +405,9 @@
         <input type="date" name="date" id="date">
         <input type="submit">
     </form> -->
+    <script type="module" src="/static/js/api.js"></script>
+    <script type="module" src="/static/js/app.js"></script>
+    <script type="module" src="/static/js/route.js"></script>
 </body>
 
 </html>

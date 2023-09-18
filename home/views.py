@@ -9,14 +9,13 @@ from decouple import config
 # debug = config('DEBUG')
 
 # if not debug:
-#     path = "/var/www/weather/Model/"
+#     path = "/var/www/weather/Model/new/"
 # else:
-#     path = "./Model/"
-
-# with open(path+'pakka_final_model.pkl', 'rb') as model_file:
+#     path = "./Model/new/"
+# # path = "./Model/new/"
+# with open(path+'main_final_model.pkl', 'rb') as model_file:
 #     loaded_model = pickle.load(model_file)
-# model = load("./Model/model.joblib")
-# historical_data = pd.read_csv(path+"output.csv")
+# historical_data = pd.read_csv(path+"2nd_exp.csv")
 
 # Create your views here.
 def index(request):
