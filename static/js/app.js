@@ -77,6 +77,26 @@ currentLocationBtn.addEventListener("click", () => {
         loading.style.display = "grid";
     }
 });
+function aQIforecastApi(city){
+    const url = "https://weather.codewithbishal.com/";
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Get the month (0-indexed, so we add 1)
+    const day = String(currentDate.getDate()).padStart(2, '0'); // Get the day of the month
+    // Create the formatted date string in the "YYYY-MM-DD" format
+    const formattedDate = `${year}-${month}-${day}`;
+    let options = {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+            city: city,
+            date: formattedDate
+        }),
+    };
+    fetch(url, options).then((response)=> response.json()).then((json)=>console.log(json));
+}
 
 export const updateWeather = function (lat, lon) {
     loading.style.display = "grid";
@@ -136,6 +156,7 @@ export const updateWeather = function (lat, lon) {
         `;
         fetchData(url.reverseGeo(lat, lon), function ([{ name, country }]) {
             card.querySelector("[data-location]").innerHTML = `${name}, ${country}`;
+            aQIforecastApi(name);
         });
         currentWeatherSection.appendChild(card);
         fetchData(url.airPollution(lat, lon), function (airPollution) {
