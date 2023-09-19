@@ -7,19 +7,19 @@ export const fetchData = function(URL, callback) {
 }
 export const url = {
     currentWeather(lat, lon){
-        return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric`;
+        return `https://api.openweathermap.org/data/2.5/weather?${lat}&${lon}&units=metric`;
     },
     forecast(lat, lon){
-        return `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric`;
+        return `https://api.openweathermap.org/data/2.5/forecast?${lat}&${lon}&units=metric`;
     },
     airPollution(lat, lon){
-        return `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}`;
+        return `https://api.openweathermap.org/data/2.5/air_pollution?${lat}&${lon}`;
     },
     geo(query){
         return `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5`;
     },
     reverseGeo(lat,lon){
-        return `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5`;
+        return `http://api.openweathermap.org/geo/1.0/reverse?${lat}&${lon}&limit=5`;
     }
 }
 
@@ -60,6 +60,13 @@ export const getTime = function(timeUnix, timezone) {
     const minutes = date.getUTCMinutes();
     const period = hours >= 12 ? "PM" : "AM";
     return `${hours % 12 || 12}:${minutes} ${period};`
+}
+
+export const getHours = function(timeUnix, timezone){
+    const date = new Date((timeUnix+timezone)*1000);
+    const hours = date.getUTCHours();
+    const period = hours >= 12 ? "PM" : "AM";
+    return `${hours % 12 || 12} ${period};`
 }
 
 export const aqiText = {

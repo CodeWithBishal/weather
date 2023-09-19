@@ -6,16 +6,16 @@ import pickle
 import requests
 from decouple import config
 
-# debug = config('DEBUG')
+debug = config('DEBUG')
 
-# if not debug:
-#     path = "/var/www/weather/Model/new/"
-# else:
-#     path = "./Model/new/"
-# # path = "./Model/new/"
-# with open(path+'main_final_model.pkl', 'rb') as model_file:
-#     loaded_model = pickle.load(model_file)
-# historical_data = pd.read_csv(path+"2nd_exp.csv")
+if not debug:
+    path = "/var/www/weather/Model/new/"
+else:
+    path = "./Model/new/"
+# path = "./Model/new/"
+with open(path+'main_final_model.pkl', 'rb') as model_file:
+    loaded_model = pickle.load(model_file)
+historical_data = pd.read_csv(path+"2nd_exp.csv")
 
 # Create your views here.
 def index(request):

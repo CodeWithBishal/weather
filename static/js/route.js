@@ -1,6 +1,6 @@
 'use strict';
-import { updateWeather, error404} from "./api.js";
-const defaultLatLong = "#/weather?lat=28.667&lon=77.217"//Delhi
+import { updateWeather, error404} from "./app.js";
+const defaultLatLong = "#/weather?lat=28.6517178&lon=77.2219388"//Delhi
 
 const currectLoc = function() {
     window.navigator.geolocation.getCurrentPosition(res=>{
