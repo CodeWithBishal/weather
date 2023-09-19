@@ -53,7 +53,7 @@ body.dark{
 }
 
 .title-1 > sub, .title-1 > sup, li > p > sub{
-    font-size: 1.75rem;
+    font-size: 1.2rem;
 }
 
 .forecast-card .card-item > .label-1{
