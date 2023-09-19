@@ -118,7 +118,7 @@ export const updateWeather = function (lat, lon) {
     currentWeatherSection.innerHTML = "";
     highLightSection.innerHTML = "";
     hourlySection.innerHTML = "";
-    forecastSection.innerHTML = "";
+    // forecastSection.innerHTML = "";
     if (window.location.hash == "#/current-location") {
         currentLocationBtn.setAttribute("disabled", "");
     } else {
