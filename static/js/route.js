@@ -1,7 +1,6 @@
 'use strict';
 import { updateWeather, error404} from "./app.js";
 const defaultLatLong = "#/weather?lat=28.6517178&lon=77.2219388"//Delhi
-const loading = document.querySelector("[data-loading]");
 
 const currectLoc = function() {
     window.navigator.geolocation.getCurrentPosition(res=>{
@@ -29,7 +28,7 @@ const checkHash = function(){
 window.addEventListener("hashchange",checkHash);
 window.addEventListener("load", function() {
     if (!window.location.hash) {
-        window.location.hash = "#/current-location";
+        window.location.hash = defaultLatLong;
     }else{
         checkHash();
     }
