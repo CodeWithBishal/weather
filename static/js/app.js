@@ -85,10 +85,18 @@ function aQIforecastApi(city){
     const day = String(currentDate.getDate()).padStart(2, '0'); // Get the day of the month
     // Create the formatted date string in the "YYYY-MM-DD" format
     const formattedDate = `${year}-${month}-${day}`;
+    const csrfToken = getCookie("csrftoken");
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+      }
+      console.log(csrfToken)
     let options = {
         method: "POST",
         headers: {
-            "Content-type": "application/json"
+            "Content-type": "application/json",
+            "X-CSRFToken": csrfToken
         },
         body: JSON.stringify({
             city: city,
