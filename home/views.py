@@ -15,7 +15,7 @@ historical_data = pd.read_csv("/var/www/weather/Model/new/2nd_exp.csv")
 def index(request):
     if request.method == "POST":
         post_data = json.loads(request.body)
-        city = post_data["city"]
+        city = "Kolkata"
         date = post_data["date"]
         pred = predict_aqi(city, date, historical_data)
         pred1 = predict_aqi(city, date, historical_data)
