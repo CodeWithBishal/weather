@@ -64,3 +64,8 @@ def predict_aqi(city, input_date, model, df):
     predicted_aqi = forecast.loc[0, 'yhat']
 
     return predicted_aqi
+
+if __name__ == "__main__":
+    # Load historical AQI data into a DataFrame (assuming 'ds', 'y', and 'city' columns)
+    historical_data = pd.read_csv('/var/www/weather/Model/output.csv')
+    index()
