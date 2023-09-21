@@ -113,7 +113,7 @@ async function aQIforecastApi(city){
                 forecastSection.innerHTML += `
                 <li class="card-item">
                     <div class="icon-wrapper">
-                            <span class="badge aqi-${aqi}" style="position:relative;" title="${module.aqiText[aqi].message}">${module.aqiText[aqi].level}
+                            <span class="badge aqi-${aqi}" style="position:unset;" title="${module.aqiText[aqi].message}">${module.aqiText[aqi].level}
                             </span>
                     </div>
                     <p class="label-1">
