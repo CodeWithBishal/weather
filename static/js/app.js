@@ -115,7 +115,7 @@ async function aQIforecastApi(city){
                         <img src="/static/img/weather_icons/01d.png" alt="Good" width="36" height="36"
                             class="weather-icon">
                         <span class="span">
-                            <p class="title-2">${json["pred"]}</p>
+                            <p class="title-2">${parseInt(json["pred"])}</p>
                         </span>
                     </div>
                     <p class="label-1">
