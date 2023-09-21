@@ -14,10 +14,10 @@ def predict_aqi(city, input_date, df):
     # Filter data for the specified city
     city_df = df[df['City'] == city].copy()
 
-    city_df['ds'] = pd.to_datetime(date_df['ds'])
+    city_df['ds'] = pd.to_datetime(city_df['ds'])
 
     # Rename columns to 'ds' and 'y' as required by Prophet
-    date_df = date_df.rename(columns={'ds': 'ds', 'y': 'y'})
+    city_df = city_df.rename(columns={'ds': 'ds', 'y': 'y'})
 
     global model 
     model = Prophet()
@@ -33,6 +33,7 @@ def predict_aqi(city, input_date, df):
     predicted_aqi = forecast.loc[0, 'yhat']
 
     return predicted_aqi
+
 
 # Create your views here.
 @csrf_exempt
