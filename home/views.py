@@ -19,25 +19,25 @@ def index(request):
         city = post_data["city"]
         date = post_data["date"]
         pred = predict_aqi(city, date, historical_data)
-        pred1 = predict_aqi(city, date, historical_data)
+        pred = pred["yhat"]
         label = "undefined"
-        if pred<=50:
-            pred = "Good"
-            label = "1"
-        elif pred<=100 and pred>50:
-            pred = "Fair"
-            label = "2"
-        elif pred<=150 and pred>100:
-            pred = "Moderate"
-            label = "3"
-        elif pred<=200 and pred>150:
-            pred = "Poor"
-            label = "4"
-        else:
-            pred = "Very Poor"
-            label = "5"
+        # if pred<=50:
+        #     pred = "Good"
+        #     label = "1"
+        # elif pred<=100 and pred>50:
+        #     pred = "Fair"
+        #     label = "2"
+        # elif pred<=150 and pred>100:
+        #     pred = "Moderate"
+        #     label = "3"
+        # elif pred<=200 and pred>150:
+        #     pred = "Poor"
+        #     label = "4"
+        # else:
+        #     pred = "Very Poor"
+        #     label = "5"
 
-        response_data = {"label":label, "pred":pred, "pred":pred1}
+        response_data = {"label":label, "pred":pred["yhat"]}
         return JsonResponse(response_data)
     return render(request,"index.html",)
 
