@@ -6,12 +6,15 @@ import pandas as pd
 import pickle
 import requests
 import json
+from django.views.decorators.csrf import csrf_exempt
+
 
 with open('/var/www/weather/Model/pakka_final_model.pkl', 'rb') as model_file:
     loaded_model = pickle.load(model_file)
 historical_data = pd.read_csv("/var/www/weather/Model/output.csv")
 
 # Create your views here.
+@csrf_exempt
 def index(request):
     if request.method == "POST":
         post_data = json.loads(request.body)
