@@ -69,6 +69,22 @@ export const getHours = function(timeUnix, timezone){
     return `${hours % 12 || 12} ${period};`
 }
 
+export const getNext5Days = function getNext5Days() {
+    const today = new Date();
+    const result = [];
+
+    for (let i = 0; i < 5; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
+      const month = date.toLocaleString('en-US', { month: 'short' });
+      const dayOfMonth = date.getDate();
+      const formattedDate = `${dayOfMonth} ${month}`;
+      result.push(formattedDate);
+    }
+  
+    return result;
+  }
+
 export const aqiText = {
     1:{
         level: "Good",

@@ -70,6 +70,8 @@ const container = document.querySelector("[data-container]");
 const loading = document.querySelector("[data-loading]");
 const currentLocationBtn = document.querySelector("[data-current-location-btn]");
 const errorContent = document.querySelector("[data-error-content]");
+const forecastSection = document.querySelector("[data-5-day-forecast]");
+forecastSection.innerHTML = "";
 
 
 currentLocationBtn.addEventListener("click", () => {
@@ -77,33 +79,54 @@ currentLocationBtn.addEventListener("click", () => {
         loading.style.display = "grid";
     }
 });
+
 function aQIforecastApi(city){
-    const url = "https://weather.codewithbishal.com/";
+    const url = "https://weather.codewithbishal.com";
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Get the month (0-indexed, so we add 1)
     const day = String(currentDate.getDate()).padStart(2, '0'); // Get the day of the month
     // Create the formatted date string in the "YYYY-MM-DD" format
-    const formattedDate = `${year}-${month}-${day}`;
-    const csrfToken = getCookie("csrftoken");
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-      }
-      console.log(csrfToken)
-    let options = {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json",
-            "X-CSRFToken": csrfToken
-        },
-        body: JSON.stringify({
-            city: city,
-            date: formattedDate
-        }),
-    };
-    fetch(url, options).then((response)=> response.json()).then((json)=>console.log(json));
+    const date = module.getNext5Days()
+    const iter = 5;
+    for (let index = 0; index < iter; index++) {
+        const formattedDate = `${year}-${month}-${parseInt(day)+1+index}`;
+        const csrfToken = getCookie("csrftoken");
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+          }
+        let options = {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                "X-CSRFToken": csrfToken
+            },
+            body: JSON.stringify({
+                city: city,
+                date: formattedDate
+            }),
+        };
+        fetch(url, options).then((response)=> response.json()).then((json)=>{
+            forecastSection.innerHTML += `
+            <li class="card-item">
+                <div class="icon-wrapper">
+                    <img src="/static/img/weather_icons/01d.png" alt="Good" width="36" height="36"
+                        class="weather-icon">
+                    <span class="span">
+                        <p class="title-2">Good</p>
+                    </span>
+                </div>
+                <p class="label-1">
+                    ${date}
+                </p>
+                <p class="label-1">Sunday</p>
+            </li>
+            `;
+            console.log(json)
+        });   
+    }
 }
 
 export const updateWeather = function (lat, lon) {
@@ -114,11 +137,9 @@ export const updateWeather = function (lat, lon) {
     const currentWeatherSection = document.querySelector("[data-current-weather]");
     const highLightSection = document.querySelector("[data-highlights]");
     const hourlySection = document.querySelector("[data-hourly-forecast]");
-    const forecastSection = document.querySelector("[data-5-day-forecast]");
     currentWeatherSection.innerHTML = "";
     highLightSection.innerHTML = "";
     hourlySection.innerHTML = "";
-    // forecastSection.innerHTML = "";
     if (window.location.hash == "#/current-location") {
         currentLocationBtn.setAttribute("disabled", "");
     } else {
