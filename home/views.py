@@ -37,7 +37,7 @@ def index(request):
         #     pred = "Very Poor"
         #     label = "5"
 
-        response_data = {"label":label, "pred":pred["yhat"]}
+        response_data = {"label":label, "pred":pred}
         return JsonResponse(response_data)
     return render(request,"index.html",)
 
