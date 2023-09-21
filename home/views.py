@@ -8,10 +8,7 @@ import requests
 import json
 from django.views.decorators.csrf import csrf_exempt
 
-
-with open('/var/www/weather/Model/pakka_final_model.pkl', 'rb') as model_file:
-    loaded_model = pickle.load(model_file)
-historical_data = pd.read_csv("/var/www/weather/Model/output.csv")
+historical_data = pd.read_csv("/var/www/weather/Model/new/2nd_exp.csv")
 
 # Create your views here.
 @csrf_exempt
@@ -20,8 +17,9 @@ def index(request):
         post_data = json.loads(request.body)
         city = post_data["city"]
         date = post_data["date"]
-        pred = predict_aqi(city, date, loaded_model, historical_data)
-        pred1 = predict_aqi(city, date, loaded_model, historical_data)
+        pred = predict_aqi(city, date, historical_data)
+        pred1 = predict_aqi(city, date, historical_data)
+        pred1 = pred1:.2f
         label = "undefined"
         if pred<=50:
             pred = "Good"
@@ -44,28 +42,14 @@ def index(request):
     return render(request,"index.html",)
 
 import matplotlib.pyplot as plt
-def predict_aqi(city, input_date, model, df):
-    # Filter data for the specified city
-    city_df = df[df['City'] == city].copy()
-
-    # Ensure 'ds' column is in datetime format
-    city_df['ds'] = pd.to_datetime(city_df['ds'])
-
-    # Rename columns to 'ds' and 'y' as required by Prophet
-    city_df = city_df.rename(columns={'ds': 'ds', 'y': 'y'})
-
-    # Create a dataframe with the input date
-    future = pd.DataFrame({'ds': [pd.to_datetime(input_date)]})
-
-    # Make predictions for the input date
+def predict_aqi(city, date, df):
+    city_df = df[df['City']==city].copy()
+    global model
+    model = Prophet(
+        seasonality_prior_scale=5.0,
+    )
+    model.fit(city_df)
+    future = pd.DataFrame({'ds': pd.to_datetime([date])})
     forecast = model.predict(future)
-
-    # Extract the predicted AQI value
-    predicted_aqi = forecast.loc[0, 'yhat']
-
-    return predicted_aqi
-
-if __name__ == "__main__":
-    # Load historical AQI data into a DataFrame (assuming 'ds', 'y', and 'city' columns)
-    historical_data = pd.read_csv('/var/www/weather/Model/output.csv')
-    index()
+    predicted = forecast.loc[0:'yhat']
+    return predicted
