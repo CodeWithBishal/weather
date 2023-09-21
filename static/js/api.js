@@ -71,18 +71,28 @@ export const getHours = function(timeUnix, timezone){
 
 export const getNext5Days = function getNext5Days() {
     const today = new Date();
-    const result = [];
+    const ret = [];
+    const day = [];
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     for (let i = 0; i < 5; i++) {
       const date = new Date(today);
+      var dayOfWeek = undefined;
       date.setDate(today.getDate() + i);
+      if (date.getDay()+1) {
+        dayOfWeek  = days[0];
+      }else{
+        dayOfWeek = days[date.getDay()+1];
+      }
       const month = date.toLocaleString('en-US', { month: 'short' });
       const dayOfMonth = date.getDate();
       const formattedDate = `${dayOfMonth} ${month}`;
-      result.push(formattedDate);
+      ret.push(formattedDate);
+      day.push(dayOfWeek);
     }
+
   
-    return result;
+    return [ret,day];
   }
 
 export const aqiText = {

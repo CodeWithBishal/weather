@@ -87,7 +87,7 @@ async function aQIforecastApi(city){
     const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Get the month (0-indexed, so we add 1)
     const day = String(currentDate.getDate()).padStart(2, '0'); // Get the day of the month
     // Create the formatted date string in the "YYYY-MM-DD" format
-    const date = module.getNext5Days()
+    const date = module.getNext5Days()[0]
     const iter = 5;
     for (let index = 0; index < iter; index++) {
         const formattedDate = `${year}-${month}-${parseInt(day)+1+index}`;
