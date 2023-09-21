@@ -7,9 +7,9 @@ import pickle
 import requests
 import json
 
-with open('/var/www/weather/Model/new/main_final_model.pkl', 'rb') as model_file:
+with open('/var/www/weather/Model/pakka_final_model.pkl', 'rb') as model_file:
     loaded_model = pickle.load(model_file)
-historical_data = pd.read_csv("/var/www/weather/Model/new/2nd_exp.csv")
+historical_data = pd.read_csv("/var/www/weather/Model/output.csv")
 
 # Create your views here.
 def index(request):

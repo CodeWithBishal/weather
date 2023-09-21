@@ -109,22 +109,24 @@ function aQIforecastApi(city){
             }),
         };
         fetch(url, options).then((response)=> response.json()).then((json)=>{
-            forecastSection.innerHTML += `
-            <li class="card-item">
-                <div class="icon-wrapper">
-                    <img src="/static/img/weather_icons/01d.png" alt="Good" width="36" height="36"
-                        class="weather-icon">
-                    <span class="span">
-                        <p class="title-2">Good</p>
-                    </span>
-                </div>
-                <p class="label-1">
-                    ${date}
-                </p>
-                <p class="label-1">Sunday</p>
-            </li>
-            `;
-            console.log(json)
+            for (let index = 0; index < iter; index++) {
+                forecastSection.innerHTML += `
+                <li class="card-item">
+                    <div class="icon-wrapper">
+                        <img src="/static/img/weather_icons/01d.png" alt="Good" width="36" height="36"
+                            class="weather-icon">
+                        <span class="span">
+                            <p class="title-2">Good</p>
+                        </span>
+                    </div>
+                    <p class="label-1">
+                        ${date[index]}
+                    </p>
+                    <p class="label-1">Sunday</p>
+                </li>
+                `;
+                console.log(json)
+            }
         });   
     }
 }
