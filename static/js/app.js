@@ -71,7 +71,6 @@ const loading = document.querySelector("[data-loading]");
 const currentLocationBtn = document.querySelector("[data-current-location-btn]");
 const errorContent = document.querySelector("[data-error-content]");
 const forecastSection = document.querySelector("[data-5-day-forecast]");
-forecastSection.innerHTML = "";
 
 
 currentLocationBtn.addEventListener("click", () => {
@@ -81,6 +80,7 @@ currentLocationBtn.addEventListener("click", () => {
 });
 
 function aQIforecastApi(city){
+    forecastSection.innerHTML = "";
     const url = "https://weather.codewithbishal.com";
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -88,8 +88,10 @@ function aQIforecastApi(city){
     const day = String(currentDate.getDate()).padStart(2, '0'); // Get the day of the month
     // Create the formatted date string in the "YYYY-MM-DD" format
     const date = module.getNext5Days()
+    const runIter = true
     const iter = 5;
-    for (let index = 0; index < iter; index++) {
+    for (let index = 0; (index < iter)&& runIter==true;) {
+        runIter=false;
         const formattedDate = `${year}-${month}-${parseInt(day)+1+index}`;
         const csrfToken = getCookie("csrftoken");
         function getCookie(name) {
@@ -125,6 +127,8 @@ function aQIforecastApi(city){
                 </li>
                 `;
                 console.log(json)
+                index++;
+                runIter=true;
         });   
     }
 }
