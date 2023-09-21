@@ -109,13 +109,13 @@ async function aQIforecastApi(city){
             }),
         };
         await fetch(url, options).then((response)=> response.json()).then((json)=>{
+                let aqi = json["label"];
                 forecastSection.innerHTML += `
                 <li class="card-item">
                     <div class="icon-wrapper">
-                        <img src="/static/img/weather_icons/01d.png" alt="Good" width="36" height="36"
-                            class="weather-icon">
                         <span class="span">
-                            <p class="title-2">${parseInt(json["pred"])}</p>
+                            <span class="badge aqi-${aqi} label-${aqi}" title="${module.aqiText[aqi].message}">$${module.aqiText[aqi].level}
+                            </span>
                         </span>
                     </div>
                     <p class="label-1">
