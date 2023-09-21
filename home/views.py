@@ -7,6 +7,7 @@ import pickle
 import requests
 import json
 from django.views.decorators.csrf import csrf_exempt
+from prophet import Prophet
 
 historical_data = pd.read_csv("/var/www/weather/Model/new/2nd_exp.csv")
 
@@ -15,7 +16,7 @@ historical_data = pd.read_csv("/var/www/weather/Model/new/2nd_exp.csv")
 def index(request):
     if request.method == "POST":
         post_data = json.loads(request.body)
-        city = "Kolkata"
+        city = post_data["city"]
         date = post_data["date"]
         pred = predict_aqi(city, date, historical_data)
         pred1 = predict_aqi(city, date, historical_data)
