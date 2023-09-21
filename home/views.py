@@ -19,7 +19,6 @@ def index(request):
         date = post_data["date"]
         pred = predict_aqi(city, date, historical_data)
         pred1 = predict_aqi(city, date, historical_data)
-        pred1 = pred1:.2f
         label = "undefined"
         if pred<=50:
             pred = "Good"
