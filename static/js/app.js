@@ -79,7 +79,7 @@ currentLocationBtn.addEventListener("click", () => {
     }
 });
 
-function aQIforecastApi(city){
+async function aQIforecastApi(city){
     forecastSection.innerHTML = "";
     const url = "https://weather.codewithbishal.com";
     const currentDate = new Date();
@@ -88,10 +88,8 @@ function aQIforecastApi(city){
     const day = String(currentDate.getDate()).padStart(2, '0'); // Get the day of the month
     // Create the formatted date string in the "YYYY-MM-DD" format
     const date = module.getNext5Days()
-    var runIter = true
     const iter = 5;
-    for (let index = 0; (index < iter)&& runIter==true;) {
-        runIter=false;
+    for (let index = 0; index < iter; index++) {
         const formattedDate = `${year}-${month}-${parseInt(day)+1+index}`;
         const csrfToken = getCookie("csrftoken");
         function getCookie(name) {
@@ -110,7 +108,7 @@ function aQIforecastApi(city){
                 date: formattedDate
             }),
         };
-        fetch(url, options).then((response)=> response.json()).then((json)=>{
+        await fetch(url, options).then((response)=> response.json()).then((json)=>{
                 forecastSection.innerHTML += `
                 <li class="card-item">
                     <div class="icon-wrapper">
@@ -127,8 +125,6 @@ function aQIforecastApi(city){
                 </li>
                 `;
                 console.log(json)
-                index++;
-                runIter=true;
         });   
     }
 }
