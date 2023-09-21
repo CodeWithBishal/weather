@@ -79,7 +79,7 @@ export const getNext5Days = function getNext5Days() {
       const date = new Date(today);
       var dayOfWeek = undefined;
       date.setDate(today.getDate() + i);
-      if (date.getDay()+1) {
+      if (date.getDay()+1 > 6) {
         dayOfWeek  = days[0];
       }else{
         dayOfWeek = days[date.getDay()+1];
