@@ -87,7 +87,7 @@ async function aQIforecastApi(city){
     const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Get the month (0-indexed, so we add 1)
     const day = String(currentDate.getDate()).padStart(2, '0'); // Get the day of the month
     // Create the formatted date string in the "YYYY-MM-DD" format
-    const date = module.getNext5Days()[0]
+    const date = module.getNext5Days()
     const iter = 5;
     for (let index = 0; index < iter; index++) {
         const formattedDate = `${year}-${month}-${parseInt(day)+1+index}`;
@@ -115,16 +115,15 @@ async function aQIforecastApi(city){
                         <img src="/static/img/weather_icons/01d.png" alt="Good" width="36" height="36"
                             class="weather-icon">
                         <span class="span">
-                            <p class="title-2">Good</p>
+                            <p class="title-2">${json["pred"]}</p>
                         </span>
                     </div>
                     <p class="label-1">
-                        ${date[index]}
+                        ${date[0][index]}
                     </p>
-                    <p class="label-1">Sunday</p>
+                    <p class="label-1">${date[1][index]}</p>
                 </li>
                 `;
-                console.log(json)
         });   
     }
 }
