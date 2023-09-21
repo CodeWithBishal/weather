@@ -11,9 +11,9 @@ from prophet import Prophet
 import matplotlib.pyplot as plt
 
 
-with open('/var/www/weather/Model/latest/last_hope2.pkl', 'rb') as model_file:
+with open('/var/www/weather/Model/pakka_final_model.pkl', 'rb') as model_file:
     loaded_model = pickle.load(model_file)
-historical_data = pd.read_csv("/var/www/weather/Model/latest/experiment.csv")
+historical_data = pd.read_csv("/var/www/weather/Model/output.csv")
 # Create your views here.
 @csrf_exempt
 def index(request):
@@ -22,24 +22,25 @@ def index(request):
         city = post_data["city"]
         date = post_data["date"]
         pred = predict_aqi(city, date, loaded_model, historical_data)
+        pred1 = predict_aqi(city, date, loaded_model, historical_data)
         label = "undefined"
-        # if pred<=50:
-        #     pred = "Good"
-        #     label = "1"
-        # elif pred<=100 and pred>50:
-        #     pred = "Fair"
-        #     label = "2"
-        # elif pred<=150 and pred>100:
-        #     pred = "Moderate"
-        #     label = "3"
-        # elif pred<=200 and pred>150:
-        #     pred = "Poor"
-        #     label = "4"
-        # else:
-        #     pred = "Very Poor"
-        #     label = "5"
+        if pred<=50:
+            pred = "Good"
+            label = "1"
+        elif pred<=100 and pred>50:
+            pred = "Fair"
+            label = "2"
+        elif pred<=150 and pred>100:
+            pred = "Moderate"
+            label = "3"
+        elif pred<=200 and pred>150:
+            pred = "Poor"
+            label = "4"
+        else:
+            pred = "Very Poor"
+            label = "5"
 
-        response_data = {"label":label, "pred":pred}
+        response_data = {"label":label, "pred":pred, "pred1":pred1}
         return JsonResponse(response_data)
     return render(request,"index.html",)
 
