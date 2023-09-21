@@ -109,7 +109,6 @@ function aQIforecastApi(city){
             }),
         };
         fetch(url, options).then((response)=> response.json()).then((json)=>{
-            for (let index = 0; index < iter; index++) {
                 forecastSection.innerHTML += `
                 <li class="card-item">
                     <div class="icon-wrapper">
@@ -126,7 +125,6 @@ function aQIforecastApi(city){
                 </li>
                 `;
                 console.log(json)
-            }
         });   
     }
 }
