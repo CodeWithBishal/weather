@@ -24,10 +24,10 @@ def index(request):
         pred = predict_aqi(city, date, loaded_model, historical_data)
         pred1 = predict_aqi(city, date, loaded_model, historical_data)
         label = "undefined"
-        if pred<=50:
+        if pred<=60:
             pred = "Good"
             label = "1"
-        elif pred<=100 and pred>50:
+        elif pred<=100 and pred>60:
             pred = "Fair"
             label = "2"
         elif pred<=150 and pred>100:
