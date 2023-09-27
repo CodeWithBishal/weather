@@ -91,7 +91,7 @@ async function aQIforecastApi(city){
     for (let index = 0; index < 5; index++) {
         let formattedDate = `${year}-${month}-${parseInt(day)+1+index}`;
         if (parseInt(day)+1+index > new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate()) {
-            formattedDate = `${year}-${month+1}-1`;
+            formattedDate = `${year}-${parseInt(month)+1}-1`;
           }
         const csrfToken = getCookie("csrftoken");
         function getCookie(name) {
