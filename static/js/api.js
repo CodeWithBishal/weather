@@ -86,6 +86,9 @@ export const getNext5Days = function getNext5Days() {
       }
       const month = date.toLocaleString('en-US', { month: 'short' });
       const dayOfMonth = date.getDate();
+      if (dayOfMonth > new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) {
+        dayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+      }
       const formattedDate = `${dayOfMonth} ${month}`;
       ret.push(formattedDate);
       day.push(dayOfWeek);
