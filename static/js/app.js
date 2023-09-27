@@ -90,7 +90,7 @@ async function aQIforecastApi(city){
     const date = module.getNext5Days()
     for (let index = 0; index < 5; index++) {
         const formattedDate = `${year}-${month}-${parseInt(day)+1+index}`;
-        if (formattedDate > new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate()) {
+        if (parseInt(day)+1+index > new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate()) {
             formattedDate = `${year}-${month+1}-1`;
           }
         const csrfToken = getCookie("csrftoken");
@@ -105,6 +105,7 @@ async function aQIforecastApi(city){
                 "Content-type": "application/json",
                 "X-CSRFToken": csrfToken
             },
+            // mode: 'no-cors',
             body: JSON.stringify({
                 city: city,
                 date: formattedDate
