@@ -90,6 +90,7 @@ export const getNext5Days = function getNext5Days() {
         dayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
       }
       const formattedDate = `${dayOfMonth} ${month}`;
+      console.log(formattedDate);
       ret.push(formattedDate);
       day.push(dayOfWeek);
     }

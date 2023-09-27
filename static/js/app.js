@@ -108,6 +108,7 @@ async function aQIforecastApi(city){
                 date: formattedDate
             }),
         };
+        console.log(` asd ${formattedDate}`)
         await fetch(url, options).then((response)=> response.json()).then((json)=>{
                 let aqi = json["label"];
                 forecastSection.innerHTML += `
