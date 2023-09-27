@@ -89,7 +89,7 @@ async function aQIforecastApi(city){
     // Create the formatted date string in the "YYYY-MM-DD" format
     const date = module.getNext5Days()
     for (let index = 0; index < 5; index++) {
-        const formattedDate = `${year}-${month}-${parseInt(day)+1+index}`;
+        let formattedDate = `${year}-${month}-${parseInt(day)+1+index}`;
         if (parseInt(day)+1+index > new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate()) {
             formattedDate = `${year}-${month+1}-1`;
           }
