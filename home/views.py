@@ -22,7 +22,6 @@ def index(request):
         city = post_data["city"]
         date = post_data["date"]
         pred = predict_aqi(city, date, loaded_model, historical_data)
-        pred1 = predict_aqi(city, date, loaded_model, historical_data)
         label = "undefined"
         if pred<=60:
             pred = "Good"
@@ -40,7 +39,7 @@ def index(request):
             pred = "Very Poor"
             label = "5"
 
-        response_data = {"label":label, "pred":pred, "pred1":pred1}
+        response_data = {"label":label, "pred":pred,}
         return JsonResponse(response_data)
     return render(request,"index.html",)
 
